@@ -27,6 +27,7 @@
 
 @property(nonatomic, retain) NSString *title;
 @property(nonatomic, strong) NSMutableArray *sections;
+@property(nonatomic, strong) NSDictionary *sectionTemplate;
 @property(assign) BOOL grouped;
 
 @property(nonatomic, retain) NSString *controllerName;
@@ -43,5 +44,6 @@
 
 - (void)fetchValueUsingBindingsIntoObject:(id)object;
 
+- (QSection *)sectionWithKey:(NSString *)key;
 - (QElement *)elementWithKey:(NSString *)string;
 @end

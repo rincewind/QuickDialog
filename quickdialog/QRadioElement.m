@@ -12,6 +12,8 @@
 // permissions and limitations under the License.
 //
 
+#import "QBindingEvaluator.h"
+
 @implementation QRadioElement {
     QSection *_internalRadioItemsSection;
 }
@@ -39,7 +41,11 @@
 }
 
 -(void)setSelectedValue:(NSObject *)aSelected {
+    if ([aSelected isKindOfClass:[NSNumber class]]) {
+    _selected = [(NSNumber *)aSelected integerValue];
+    } else {
     _selected = [_values indexOfObject:aSelected];
+    }
 }
 
 
@@ -56,6 +62,7 @@
     return self;
 }
 
+
 -(void)setSelectedItem:(id)item {
     if (self.items==nil)
         return;
@@ -63,6 +70,9 @@
 }
 
 -(id)selectedItem {
+    if (self.items == nil || [self.items count]<self.selected)
+        return nil;
+
     return [self.items objectAtIndex:(NSUInteger) self.selected];
 }
 
@@ -85,21 +95,25 @@
 
 
 - (UITableViewCell *)getCellForTableView:(QuickDialogTableView *)tableView controller:(QuickDialogController *)controller {
-    UITableViewCell *cell = [super getCellForTableView:tableView controller:controller];
+    QEntryTableViewCell *cell = (QEntryTableViewCell *) [super getCellForTableView:tableView controller:controller];
 
     NSString *selectedValue = nil;
     if (_selected >= 0 && _selected <_items.count)
         selectedValue = [[_items objectAtIndex:(NSUInteger) _selected] description];
 
     if (self.title == NULL){
-        cell.textLabel.text = selectedValue;
+        cell.textField.text = selectedValue;
         cell.detailTextLabel.text = nil;
         cell.imageView.image = nil;
     } else {
         cell.textLabel.text = _title;
-        cell.detailTextLabel.text = selectedValue;
+        cell.textField.text = selectedValue;
         cell.imageView.image = nil;
     }
+    cell.textField.textAlignment = UITextAlignmentRight;
+    cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.selectionStyle = UITableViewCellSelectionStyleBlue;
+    cell.textField.userInteractionEnabled = NO;
     return cell;
 }
 
@@ -121,7 +135,6 @@
         [obj setValue:[_values objectAtIndex:(NSUInteger) _selected] forKey:_key];
     }
 }
-
 
 
 @end
