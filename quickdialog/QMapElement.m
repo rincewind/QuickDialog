@@ -12,6 +12,9 @@
 // permissions and limitations under the License.
 //
 
+#ifdef QDIALOG_WITH_CL
+
+
 #import "QMapViewController.h"
 #import "QMapElement.h"
 
@@ -45,3 +48,5 @@
 
 }
 @end
+
+#endif
