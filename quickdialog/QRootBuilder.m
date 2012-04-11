@@ -114,15 +114,6 @@ NSDictionary *QRootBuilderStringToTypeConversionDict;
                                 [NSNumber numberWithInt:UITextAutocapitalizationTypeSentences], @"Sentences",
                                 [NSNumber numberWithInt:UITextAutocapitalizationTypeAllCharacters], @"AllCharacters",
                                 nil], @"autocapitalizationType",
-                    [[NSDictionary alloc] initWithObjectsAndKeys:
-                        [NSNumber numberWithBool: NO], @"No",
-                        [NSNumber numberWithBool: YES], @"Yes",
-                        nil], @"hiddenToolbar",
-                  [[NSDictionary alloc] initWithObjectsAndKeys:
-                   [NSNumber numberWithBool: NO], @"No",
-                   [NSNumber numberWithBool: YES], @"Yes",
-                   nil], @"enabled",
-                                                
 
                     [[NSDictionary alloc] initWithObjectsAndKeys:
                             [NSNumber numberWithInt:UITextAutocorrectionTypeDefault], @"Default",
