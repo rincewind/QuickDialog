@@ -25,9 +25,10 @@ NSDictionary *QRootBuilderStringToTypeConversionDict;
 
 + (void)trySetProperty:(NSString *)propertyName onObject:(id)target withValue:(id)value {
     if ([value isKindOfClass:[NSString class]]) {
-        [target setValue:value forKeyPath:propertyName];
         if ([QRootBuilderStringToTypeConversionDict objectForKey:propertyName]!=nil) {
             [target setValue:[[QRootBuilderStringToTypeConversionDict objectForKey:propertyName] objectForKey:value] forKeyPath:propertyName];
+        } else {
+            [target setValue:value forKeyPath:propertyName];
         }
     } else if ([value isKindOfClass:[NSNumber class]]){
         [target setValue:value forKeyPath:propertyName];
@@ -113,6 +114,15 @@ NSDictionary *QRootBuilderStringToTypeConversionDict;
                                 [NSNumber numberWithInt:UITextAutocapitalizationTypeSentences], @"Sentences",
                                 [NSNumber numberWithInt:UITextAutocapitalizationTypeAllCharacters], @"AllCharacters",
                                 nil], @"autocapitalizationType",
+                    [[NSDictionary alloc] initWithObjectsAndKeys:
+                        [NSNumber numberWithBool: NO], @"No",
+                        [NSNumber numberWithBool: YES], @"Yes",
+                        nil], @"hiddenToolbar",
+                  [[NSDictionary alloc] initWithObjectsAndKeys:
+                   [NSNumber numberWithBool: NO], @"No",
+                   [NSNumber numberWithBool: YES], @"Yes",
+                   nil], @"enabled",
+                                                
 
                     [[NSDictionary alloc] initWithObjectsAndKeys:
                             [NSNumber numberWithInt:UITextAutocorrectionTypeDefault], @"Default",
